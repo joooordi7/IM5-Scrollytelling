@@ -3,101 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Coffee Scroll Fade</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 <body>
-    <!-- Hero Section with Ken Burns Effect -->
-    <section class="hero" id="hero">
-        <div class="hero-images">
-            <div class="hero-image" id="hero-img-1" style="background-image: url('assets/bialetti-slide-1.jpg');"></div>
-            <div class="hero-image" id="hero-img-2" style="background-image: url('assets/filter-side-1.jpg');"></div>
-            <div class="hero-image" id="hero-img-3" style="background-image: url('assets/turk-1.jpg');"></div>
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">La Storia del Caffè</h1>
-            <p class="hero-subtitle">Un viaggio attraverso i secoli</p>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scorri per esplorare</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
 
-    <!-- Main Slides Container -->
-    <main class="slides-container" id="slides-container">
-        
-        <!-- Chapter 1: Bialetti (Vertical) -->
-        <section class="chapter" id="chapter-bialetti">
-            <div class="slide full-page-slide">
-                <img src="assets/bialetti-slide-1.jpg" alt="Moka Bialetti originale" loading="lazy">
-            </div>
-            <div class="slide full-page-slide">
-                <img src="assets/bialetti-slide-2.jpg" alt="Preparazione caffè con Moka" loading="lazy">
-            </div>
-            <div class="slide full-page-slide">
-                <img src="assets/bialetti-side.jpg" alt="Dettaglio Moka Bialetti" loading="lazy">
-            </div>
-        </section>
+<main class="slideshow">
+    <!-- Stack all images here, only one is visible at a time -->
 
-        <!-- Chapter 2: Filter (Horizontal) -->
-        <section class="chapter horizontal-chapter" id="chapter-filter">
-            <div class="horizontal-track">
-                <div class="slide horizontal-slide">
-                    <img src="assets/filter-side.jpg" alt="Caffè filtro" loading="lazy">
-                </div>
-                <div class="slide horizontal-slide">
-                    <img src="assets/filter-side-1.jpg" alt="Preparazione filtro" loading="lazy">
-                </div>
-                <div class="slide horizontal-slide">
-                    <img src="assets/filter-side-2.jpg" alt="Versamento caffè filtro" loading="lazy">
-                </div>
-                <div class="slide horizontal-slide">
-                    <img src="assets/filter-side-3.jpg" alt="Caffè filtro servito" loading="lazy">
-                </div>
-            </div>
-        </section>
+    <!-- Turkish -->
+    <img src="assets/türk-1.jpg"  alt="Caffè turco tradizionale"
+         class="slide-image is-active" data-anim="fade">
 
-        <!-- Chapter 3: Nespresso (Vertical) -->
-        <section class="chapter" id="chapter-nespresso">
-            <div class="slide full-page-slide">
-                <img src="assets/nespresso-side.jpg" alt="Macchina Nespresso" loading="lazy">
-            </div>
-            <div class="slide full-page-slide">
-                <img src="assets/nespresso-side-1.jpg" alt="Capsule Nespresso" loading="lazy">
-            </div>
-            <div class="slide full-page-slide">
-                <img src="assets/nespresso-side-2.jpg" alt="Espresso Nespresso" loading="lazy">
-            </div>
-            <div class="slide full-page-slide">
-                <img src="assets/nespresso-side-3.jpg" alt="Caffè Nespresso servito" loading="lazy">
-            </div>
-        </section>
+    <img src="assets/türk-2.jpg"  alt="Preparazione caffè turco"
+         class="slide-image" data-anim="slide-down">
 
-        <!-- Chapter 4: Turkish (Horizontal) -->
-        <section class="chapter horizontal-chapter" id="chapter-turkish">
-            <div class="horizontal-track">
-                <div class="slide horizontal-slide">
-                    <img src="assets/turk-1.jpg" alt="Caffè turco tradizionale" loading="lazy">
-                </div>
-                <div class="slide horizontal-slide">
-                    <img src="assets/turk-2.jpg" alt="Preparazione caffè turco" loading="lazy">
-                </div>
-                <div class="slide horizontal-slide">
-                    <img src="assets/turk-3.jpg" alt="Ibrik sul fuoco" loading="lazy">
-                </div>
-                <div class="slide horizontal-slide" id="last-slide">
-                    <img src="assets/turk-4.jpg" alt="Caffè turco servito" loading="lazy">
-                </div>
-            </div>
-        </section>
+    <img src="assets/türk-3.jpg"  alt="Ibrik sul fuoco"
+         class="slide-image" data-anim="fade">
 
-    </main>
+    <img src="assets/türk-4.jpg"  alt="Caffè turco servito"
+         class="slide-image" data-anim="slide-down">
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
+    <!-- Filter -->
+    <img src="assets/filter-side.jpg"   alt="Caffè filtro"
+         class="slide-image" data-anim="fade">
+
+    <img src="assets/filter-side-1.jpg" alt="Preparazione filtro"
+         class="slide-image" data-anim="slide-down">
+
+    <img src="assets/filter-side-2.jpg" alt="Versamento caffè filtro"
+         class="slide-image" data-anim="fade">
+
+    <img src="assets/filter-side-3.jpg" alt="Caffè filtro servito"
+         class="slide-image" data-anim="slide-down">
+
+    <!-- Bialetti -->
+    <img src="assets/bialetti-slide-1.jpg" alt="Moka Bialetti originale"
+         class="slide-image" data-anim="fade">
+
+    <img src="assets/bialetti-slide-2.jpg" alt="Preparazione caffè con Moka"
+         class="slide-image" data-anim="slide-down">
+
+    <img src="assets/bialletti-1-side.jpg" alt="Dettaglio Moka Bialetti"
+         class="slide-image" data-anim="fade">
+
+    <!-- Nespresso -->
+    <img src="assets/nespresso-side.jpg"   alt="Macchina Nespresso"
+         class="slide-image" data-anim="slide-down">
+
+    <img src="assets/nespresso-side-1.jpg" alt="Capsule Nespresso"
+         class="slide-image" data-anim="fade">
+
+    <img src="assets/nespresso-side-2.jpg" alt="Espresso Nespresso"
+         class="slide-image" data-anim="slide-down">
+
+    <img src="assets/nespresso-side-3.jpg" alt="Caffè Nespresso servito"
+         class="slide-image" data-anim="fade">
+</main>
+
+<script src="js/main.js"></script>
 </body>
 </html>

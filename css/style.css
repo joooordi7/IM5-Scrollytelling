@@ -1,0 +1,115 @@
+/* ========= Reset ========= */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* no native scroll */
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #050505;
+    color: #fff;
+}
+
+/* ========= Slideshow Container ========= */
+
+.slideshow {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #333 0, #050505 55%, #000 100%);
+}
+
+/* Vignette / subtle overlay */
+.slideshow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 100%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 40%);
+    mix-blend-mode: normal;
+    z-index: 2;
+}
+
+
+/* ========= Slides ========= */
+
+/* Base slide style */
+.slide-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    filter: contrast(1.02) saturate(1.02);
+}
+
+/* ---------- FADE (default / artistic) ---------- */
+
+.slide-image[data-anim="fade"],
+.slide-image:not([data-anim]) {
+    transition: opacity 2.5s ease-in-out;
+}
+
+.slide-image[data-anim="fade"].is-active,
+.slide-image:not([data-anim]).is-active {
+    opacity: 1;
+}
+
+/* ---------- SLIDE DOWN VARIANT ---------- */
+
+.slide-image[data-anim="slide-down"] {
+    transform: translateY(-6%);
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+.slide-image[data-anim="slide-down"].is-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- LEAVING STATE (optional, works for all) ---------- */
+
+.slide-image.is-leaving {
+    opacity: 0;
+    transform: scale(1.03);
+    filter: blur(6px) contrast(1.02) saturate(1.02);
+    z-index: 1;
+}
+
+
+/* ========= (Optional) Small hint text ========= */
+
+.hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    pointer-events: none;
+}
+
+/* You can add this div in HTML if you want:
+   <div class="hint">Scroll to explore</div>
+*/

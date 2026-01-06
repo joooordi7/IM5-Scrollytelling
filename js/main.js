@@ -1,121 +1,108 @@
-// ========================================
-// La Storia del Caffè - Main JavaScript
-// ========================================
+// Cinematic scroll slideshow – smooth crossfade + subtle zoom
 
-document.addEventListener('DOMContentLoaded', () => {
-    initHeroKenBurns();
-    initInfiniteLoop();
-    initScrollAnimations();
-});
+const slides = document.querySelectorAll('.slide-image');
+let currentIndex = 0;
+let isAnimating = false;
 
-// ========================================
-// Hero Ken Burns Effect
-// ========================================
-function initHeroKenBurns() {
-    const heroImages = document.querySelectorAll('.hero-image');
-    if (heroImages.length === 0) return;
-    
-    let currentIndex = 0;
-    const intervalTime = 6000; // 6 seconds per image
-    
-    // Show first image
-    heroImages[currentIndex].classList.add('active');
-    
-    // Cycle through images
-    setInterval(() => {
-        heroImages[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % heroImages.length;
-        heroImages[currentIndex].classList.add('active');
-    }, intervalTime);
+// match CSS transition (~900ms)
+const ANIMATION_DURATION = 900;
+
+// Helper: switch slides with crossfade
+function goToSlide(newIndex) {
+    if (newIndex === currentIndex || newIndex < 0 || newIndex >= slides.length) return;
+
+    const currentSlide = slides[currentIndex];
+    const nextSlide = slides[newIndex];
+
+    isAnimating = true;
+
+    // Prepare next slide
+    nextSlide.classList.add('is-active');
+    nextSlide.classList.remove('is-leaving'); // just in case
+
+    // Animate current slide out
+    currentSlide.classList.remove('is-active');
+    currentSlide.classList.add('is-leaving');
+
+    // After animation: clean up
+    setTimeout(() => {
+        currentSlide.classList.remove('is-leaving');
+        currentIndex = newIndex;
+        isAnimating = false;
+    }, ANIMATION_DURATION);
 }
 
-// ========================================
-// Infinite Loop Scroll
-// ========================================
-function initInfiniteLoop() {
-    const lastSlide = document.getElementById('last-slide');
-    const hero = document.getElementById('hero');
-    
-    if (!lastSlide || !hero) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.8) {
-                // Wait a moment, then scroll back to top
-                setTimeout(() => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }, 1500);
-            }
-        });
-    }, {
-        threshold: 0.8
-    });
-    
-    observer.observe(lastSlide);
+function goNext() {
+    if (currentIndex >= slides.length - 1) return;
+    goToSlide(currentIndex + 1);
 }
 
-// ========================================
-// Scroll-Driven Animations
-// ========================================
-function initScrollAnimations() {
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    
-    if (!hero || !heroContent) return;
-    
-    let ticking = false;
-    
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const scrollY = window.scrollY;
-                const heroHeight = hero.offsetHeight;
-                const scrollProgress = Math.min(scrollY / heroHeight, 1);
-                
-                // Parallax effect on hero content
-                heroContent.style.transform = `translateY(${scrollProgress * 50}px)`;
-                heroContent.style.opacity = 1 - scrollProgress;
-                
-                // Fade out scroll indicator
-                if (scrollIndicator) {
-                    scrollIndicator.style.opacity = 1 - (scrollProgress * 2);
-                }
-                
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
+function goPrev() {
+    if (currentIndex <= 0) return;
+    goToSlide(currentIndex - 1);
 }
 
-// ========================================
-// Smooth Scroll for Anchor Links
-// ========================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
+/* ===== Scroll (wheel / trackpad) ===== */
+
+window.addEventListener(
+    'wheel',
+    (event) => {
+        event.preventDefault(); // keep page fixed
+
+        if (isAnimating) return;
+
+        if (event.deltaY > 0) {
+            // scroll down
+            goNext();
+        } else if (event.deltaY < 0) {
+            // scroll up
+            goPrev();
         }
-    });
+    },
+    { passive: false }
+);
+
+/* ===== Keyboard navigation (optional) ===== */
+
+window.addEventListener('keydown', (event) => {
+    if (isAnimating) return;
+
+    if (event.key === 'ArrowDown' || event.key === 'PageDown' || event.key === ' ') {
+        goNext();
+    } else if (event.key === 'ArrowUp' || event.key === 'PageUp') {
+        goPrev();
+    }
 });
 
-// ========================================
-// Horizontal Scroll Enhancement
-// ========================================
-document.querySelectorAll('.horizontal-chapter').forEach(chapter => {
-    // Enable mouse wheel horizontal scrolling
-    chapter.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-            e.preventDefault();
-            chapter.scrollLeft += e.deltaY;
-        }
-    }, { passive: false });
-});
+/* ===== Touch / swipe on mobile ===== */
+
+let touchStartY = null;
+
+window.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0].clientY;
+}, { passive: true });
+
+window.addEventListener('touchend', (event) => {
+    if (touchStartY === null || isAnimating) return;
+
+    const touchEndY = event.changedTouches[0].clientY;
+    const diffY = touchStartY - touchEndY;
+    const threshold = 40; // need a bigger swipe
+
+    if (diffY > threshold) {
+        // swipe up -> next
+        goNext();
+    } else if (diffY < -threshold) {
+        // swipe down -> previous
+        goPrev();
+    }
+
+    touchStartY = null;
+}, { passive: true });
+
+/* ===== Initial state ===== */
+
+// make sure the first slide is visible
+if (slides.length > 0) {
+    slides[0].classList.add('is-active');
+}
