@@ -1,66 +1,119 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee Scroll Fade</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Scroll Fade</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<main class="slideshow">
-    <!-- Stack all images here, only one is visible at a time -->
+  <main class="slideshow">
+    <!-- 15 images (your sequence) -->
 
     <!-- Turkish -->
-    <img src="assets/türk-1.jpg"  alt="Caffè turco tradizionale"
-         class="slide-image is-active" data-anim="fade">
+    <img src="assets/türk-1.jpg"
+         alt="Caffè turco tradizionale"
+         class="slide-image is-active"
+         data-anim="fade-soft">
 
-    <img src="assets/türk-2.jpg"  alt="Preparazione caffè turco"
-         class="slide-image" data-anim="slide-down">
+    <img src="assets/türk-2.jpg"
+         alt="Preparazione caffè turco"
+         class="slide-image"
+         data-anim="fade-soft">
 
-    <img src="assets/türk-3.jpg"  alt="Ibrik sul fuoco"
-         class="slide-image" data-anim="fade">
+    <!-- SOUND: türkisch.wav on türk-3.jpg -->
+    <img src="assets/türk-3.jpg"
+         alt="Ibrik sul fuoco"
+         class="slide-image"
+         data-anim="fade"
+         data-sound="türkisch">
 
-    <img src="assets/türk-4.jpg"  alt="Caffè turco servito"
-         class="slide-image" data-anim="slide-down">
+    <img src="assets/türk-4.jpg"
+         alt="Caffè turco servito"
+         class="slide-image"
+         data-anim="zoom-in">
+
 
     <!-- Filter -->
-    <img src="assets/filter-side.jpg"   alt="Caffè filtro"
-         class="slide-image" data-anim="fade">
+    <!-- SOUND: filter.wav on filter-side.jpg -->
+    <img src="assets/filter-side.jpg"
+         alt="Caffè filtro"
+         class="slide-image"
+         data-anim="slide-up"
+         data-sound="filter">
 
-    <img src="assets/filter-side-1.jpg" alt="Preparazione filtro"
-         class="slide-image" data-anim="slide-down">
+    <img src="assets/filter-side-1.jpg"
+         alt="Preparazione filtro"
+         class="slide-image"
+         data-anim="slide-right">
 
-    <img src="assets/filter-side-2.jpg" alt="Versamento caffè filtro"
-         class="slide-image" data-anim="fade">
+    <img src="assets/filter-side-2.jpg"
+         alt="Versamento caffè filtro"
+         class="slide-image"
+         data-anim="fade-soft">
 
-    <img src="assets/filter-side-3.jpg" alt="Caffè filtro servito"
-         class="slide-image" data-anim="slide-down">
+    <img src="assets/filter-side-3.jpg"
+         alt="Caffè filtro servito"
+         class="slide-image">
+
 
     <!-- Bialetti -->
-    <img src="assets/bialetti-slide-1.jpg" alt="Moka Bialetti originale"
-         class="slide-image" data-anim="fade">
 
-    <img src="assets/bialetti-slide-2.jpg" alt="Preparazione caffè con Moka"
-         class="slide-image" data-anim="slide-down">
+     <!-- SOUND: coffeebrew.wav on bialletti-1-side.jpg -->
+    <img src="assets/bialletti-1-side.jpg"
+         alt="Dettaglio Moka Bialetti"
+         class="slide-image"
+         data-anim="slide-up"
+         data-sound="coffeebrew">
 
-    <img src="assets/bialletti-1-side.jpg" alt="Dettaglio Moka Bialetti"
-         class="slide-image" data-anim="fade">
+    <img src="assets/bialetti-slide-1.jpg"
+         alt="Moka Bialetti originale"
+         class="slide-image"
+         data-anim="fade-soft">
+
+    <!-- SOUND: bialetti.wav on bialetti-slide-2.jpg -->
+    <img src="assets/bialetti-slide-2.jpg"
+         alt="Preparazione caffè con Moka"
+         class="slide-image"
+         data-anim="zoom-in"
+         data-sound="bialetti">
+
+  
 
     <!-- Nespresso -->
-    <img src="assets/nespresso-side.jpg"   alt="Macchina Nespresso"
-         class="slide-image" data-anim="slide-down">
+    <img src="assets/nespresso-side.jpg"
+         alt="Macchina Nespresso"
+         class="slide-image"
+         data-anim="fade-soft">
 
-    <img src="assets/nespresso-side-1.jpg" alt="Capsule Nespresso"
-         class="slide-image" data-anim="fade">
+    <img src="assets/nespresso-side-1.jpg"
+         alt="Capsule Nespresso"
+         class="slide-image"
+         data-anim="fade-soft">
 
-    <img src="assets/nespresso-side-2.jpg" alt="Espresso Nespresso"
-         class="slide-image" data-anim="slide-down">
+    <img src="assets/nespresso-side-2.jpg"
+         alt="Espresso Nespresso"
+         class="slide-image"
+         data-anim="zoom-in">
 
-    <img src="assets/nespresso-side-3.jpg" alt="Caffè Nespresso servito"
-         class="slide-image" data-anim="fade">
-</main>
+    <!-- SOUND: nespresso.wav on nespresso-side-3.jpg -->
+    <img src="assets/nespresso-side-3.jpg"
+         alt="Caffè Nespresso servito"
+         class="slide-image"
+         data-anim="fade-soft"
+         data-sound="nespresso">
 
-<script src="js/main.js"></script>
+
+    <!-- Scroll hint (only visible on first slide via JS) -->
+    <div class="hint-start" role="button" aria-label="Scroll to explore">
+      Scroll to explore
+    </div>
+  </main>
+
+  <!-- Coffee bean cursor only -->
+  <div class="cursor-bean" aria-hidden="true"></div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
