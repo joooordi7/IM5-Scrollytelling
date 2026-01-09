@@ -38,11 +38,11 @@ if (hintStart) {
 // =====================================
 
 const SOUND_MAP = {
-  türkisch: 'assets/türkisch.wav',
-  filter: 'assets/filter.wav',
-  coffeebrew: 'assets/coffeebrew.wav',
-  bialetti: 'assets/bialetti.wav',
-  nespresso: 'assets/nespresso.wav'
+  türkisch: 'assets/Türkisch.wav',
+  filter: 'assets/Filter.wav',
+  coffeebrew: 'assets/CoffeeBrew.wav',
+  bialetti: 'assets/Bialetti.wav',
+  nespresso: 'assets/Nespresso.wav'
 };
 
 const TARGET_VOLUME = 0.9;
